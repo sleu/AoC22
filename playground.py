@@ -1,4 +1,7 @@
-import string
+x = [[0,0],[1,1],[5,2]]
+y=[1,1]
 
-x = list(string.ascii_lowercase + string.ascii_uppercase)
+x[0][0] = y[0]
+x[0][1] = y[1]
+
 print(x)
