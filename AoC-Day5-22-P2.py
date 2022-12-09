@@ -44,7 +44,6 @@ def stack(stack_num):
 for i in range(503):
     to = stack(to_stack[i])
     fro = stack(from_stack[i])
-    #print("Count: %d" % i)
     for m in range(move_quantity[i]):
         temp.append(fro.pop())
     to.extend(temp[::-1])

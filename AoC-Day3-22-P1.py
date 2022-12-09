@@ -1,6 +1,9 @@
+import string
+
 compartment1 = []
 compartment2 = []
-duplicates = []
+total = 0
+key = list(string.ascii_lowercase + string.ascii_uppercase)
 with open('input3.txt') as i:
     rucksacks = i.read().splitlines()
 
@@ -12,13 +15,7 @@ for x in rucksacks:
 for row in compartment1:
     for letter in row:
         if letter in compartment2[compartment1.index(row)]:
-            duplicates.append(letter)
-            print(letter)
+            total += int(key.index(letter)+1)
             break
 
-
-
-
-#print('First: ' + str(len(compartment1)))
-#print('Second: ' + str(len(compartment2)))
-print('Duplicates: ' + str(len(duplicates)))
+print("The sum is: %d" % total)

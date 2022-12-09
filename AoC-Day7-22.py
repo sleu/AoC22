@@ -110,6 +110,5 @@ for line in input:
 set_dir_sizes(headnode)
 aTotal = partA(headnode, PART_A_LIMIT, partAlist)
 bValue = partB(headnode, freeupamount(), partAlist)
-print("Total Size: %d" % headnode.size)
 print("Part A: %d" % aTotal)
 print("Part B: %d" % bValue)
