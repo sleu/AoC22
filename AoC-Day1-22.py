@@ -1,17 +1,17 @@
-totalfoods = []
+total_foods = []
+calories = 0
 
 with open('input1.txt') as i:
-    food = i.read().splitlines()
+    food_list = i.read().splitlines()
 
-calories = 0
-for item in food:
-    if item == '':
-        totalfoods.append(calories)
+for food in food_list:
+    if food == '':
+        total_foods.append(calories)
         calories = 0
     else:
-        calories += int(item)
+        calories += int(food)
 
-totalfoods.sort(reverse=True)
+total_foods.sort(reverse=True)
 
-print("A - Highest Calories: %d" % totalfoods[0])
-print("B - Total Highest 3: %d" % sum(totalfoods[:3]))
+print("A - Highest Calories: %d" % total_foods[0])
+print("B - Total Highest 3: %d" % sum(total_foods[:3]))

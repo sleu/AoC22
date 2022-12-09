@@ -1,12 +1,12 @@
-stack1 = ["Z","T","F","R","W","J","G"]
-stack2 = ["G","W","M"]
-stack3 = ["J","N","H","G"]
-stack4 = ["J","R","C","N","W"]
-stack5 = ["W","F","S","B","G","Q","V","M"]
-stack6 = ["S","R","T","D","V","W","C"]
-stack7 = ["H","B","N","C","D","Z","G","V"]
-stack8 = ["S","J","N","M","G","C"]
-stack9 = ["G","P","N","W","C","J","D","L"]
+stack_1 = ["Z","T","F","R","W","J","G"]
+stack_2 = ["G","W","M"]
+stack_3 = ["J","N","H","G"]
+stack_4 = ["J","R","C","N","W"]
+stack_5 = ["W","F","S","B","G","Q","V","M"]
+stack_6 = ["S","R","T","D","V","W","C"]
+stack_7 = ["H","B","N","C","D","Z","G","V"]
+stack_8 = ["S","J","N","M","G","C"]
+stack_9 = ["G","P","N","W","C","J","D","L"]
 move_quantity = []
 from_stack = []
 to_stack = []
@@ -23,23 +23,23 @@ for sect in sections:
 def stack(stack_num):
     match stack_num:
         case "1":
-            return stack1
+            return stack_1
         case "2":
-            return stack2
+            return stack_2
         case "3":
-            return stack3
+            return stack_3
         case "4":
-            return stack4
+            return stack_4
         case "5":
-            return stack5
+            return stack_5
         case "6":
-            return stack6
+            return stack_6
         case "7":
-            return stack7
+            return stack_7
         case "8":
-            return stack8
+            return stack_8
         case "9":
-            return stack9
+            return stack_9
 
 for i in range(503):
     to = stack(to_stack[i])
@@ -47,12 +47,12 @@ for i in range(503):
     for m in range(move_quantity[i]):
         to.append(fro.pop())
 
-print("Stack 1 Last: " + stack1[-1])
-print("Stack 2 Last: " + stack2[-1])
-print("Stack 3 Last: " + stack3[-1])
-print("Stack 4 Last: " + stack4[-1])
-print("Stack 5 Last: " + stack5[-1])
-print("Stack 6 Last: " + stack6[-1])
-print("Stack 7 Last: " + stack7[-1])
-print("Stack 8 Last: " + stack8[-1])
-print("Stack 9 Last: " + stack9[-1])
+print("Stack 1 Last: " + stack_1[-1])
+print("Stack 2 Last: " + stack_2[-1])
+print("Stack 3 Last: " + stack_3[-1])
+print("Stack 4 Last: " + stack_4[-1])
+print("Stack 5 Last: " + stack_5[-1])
+print("Stack 6 Last: " + stack_6[-1])
+print("Stack 7 Last: " + stack_7[-1])
+print("Stack 8 Last: " + stack_8[-1])
+print("Stack 9 Last: " + stack_9[-1])

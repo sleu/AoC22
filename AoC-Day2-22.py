@@ -1,9 +1,9 @@
 opponent = []
 player = []
-totalA = 0
-totalB = 0
+total_a = 0
+total_b = 0
 
-keyA = {
+key_a = {
     "A": 1,
     "B": 2,
     "C": 3,
@@ -11,13 +11,13 @@ keyA = {
     "Y": 2,
     "Z": 3,
 }
-keyB = {
+key_b = {
     "X": 0,
     "Y": 3,
     "Z": 6
 }
 
-def resultA(them, me):
+def result_a(them, me):
     if (them == "A" and me == "X") or (them == "B" and me == "Y") or (them == "C" and me == "Z"):
         return 3
     elif (them == "A" and me == "Y") or (them == "B" and me == "Z") or (them == "C" and me == "X"):
@@ -25,7 +25,7 @@ def resultA(them, me):
     else:
         return 0
 
-def resultB(them, me):
+def result_b(them, me):
     if (me == "X" and them =="A") or (me == "Y" and them =="C") or (me == "Z" and them =="B"):
         return 3
     elif (me == "X" and them =="C") or (me == "Y" and them =="B") or (me == "Z" and them =="A"):
@@ -42,10 +42,10 @@ for action in play:
     player.append(splunt[1])
 
 for count, value in enumerate(opponent):
-    totalA += keyA[player[count]]
-    totalA += resultA(value, player[count])
-    totalB += keyB[player[count]]
-    totalB += resultB(value, player[count])
+    total_a += key_a[player[count]]
+    total_a += result_a(value, player[count])
+    total_b += key_b[player[count]]
+    total_b += result_b(value, player[count])
 
-print("A - Total Score: %d" % totalA)
-print("B - Total Score: %d" % totalB)
+print("A - Total Score: %d" % total_a)
+print("B - Total Score: %d" % total_b)

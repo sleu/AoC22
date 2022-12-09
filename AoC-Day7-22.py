@@ -1,8 +1,8 @@
-NOTFOUND = -10
+NOT_FOUND = -10
 PART_A_LIMIT = 100000
 SYSTEM_SIZE = 70000000
 REQUIRED_SIZE = 30000000
-partAlist = []
+part_list_a = []
 
 class Node:
     def __init__(self, name, size, type):
@@ -14,18 +14,16 @@ class Node:
 
 #Goes through the children nodes to see if this dir/file name exists and returns the position
 def find(thisname):
-    for c in range(len(currentnode.children)):
-        #print("Name to match %s, current child name %s" % (thisname ,currentnode.children[c].name))
-        if currentnode.children[c].name == thisname:
+    for c in range(len(current_node.children)):
+        if current_node.children[c].name == thisname:
             return c
-    return NOTFOUND
+    return NOT_FOUND
 
 def set_dir_sizes(node):
     for n in node.children:
         if n.type == "dir":
             set_dir_sizes(n)
             node.size += n.size
-            #print("Dir: %s, Size: %d" % (n.name, n.size))
 
 def find_dirs_sizes_limited(node, size, list, part):
     for n in node.children:
@@ -33,82 +31,74 @@ def find_dirs_sizes_limited(node, size, list, part):
             find_dirs_sizes_limited(n, size, list, part)
             if n.size <= size and part == 'A':
                 list.append(n.size)
-                #print(n.size)
             if n.size >= size and part == 'B':
                 list.append(n.size)
-                #print(n.size)
     
+#For part B
+def free_up_amount():
+    return REQUIRED_SIZE - (SYSTEM_SIZE - head_node.size)
 
-def freeupamount():#for part B
-    return REQUIRED_SIZE - (SYSTEM_SIZE - headnode.size)
-
-def partA(node, size, list): 
+def part_a(node, size, list): 
     find_dirs_sizes_limited(node, size, list, "A")
-    sumA = 0
-    for z in partAlist:
-        sumA += int(z)
-    partAlist.clear()
-    return sumA
+    sum_a = 0
+    for z in part_list_a:
+        sum_a += int(z)
+    part_list_a.clear()
+    return sum_a
 
-def partB(node, size, list):
+def part_b(node, size, list):
     find_dirs_sizes_limited(node, size, list, "B")
-    return min(partAlist)
+    return min(part_list_a)
     
 
-parseline = []
-headnode = Node("/", 0, "dir")
-currentnode = headnode
+parse_line = []
+head_node = Node("/", 0, "dir")
+current_node = head_node
 
 with open('input7.txt') as i:
     input = i.read().splitlines()
 
-#builds the data
+#Builds the data
 for line in input:
-    parseline = line.split(' ')
-    if parseline[0] == '$':
-        if parseline[1] == 'ls':
+    parse_line = line.split(' ')
+    if parse_line[0] == '$':
+        if parse_line[1] == 'ls':
             pass
-        elif parseline[1]=='cd':
-            if parseline[2] == '..':
-                if currentnode.parent is None:
-                    currentnode = headnode
+        elif parse_line[1]=='cd':
+            if parse_line[2] == '..':
+                if current_node.parent is None:
+                    current_node = head_node
                 else:
-                    currentnode = currentnode.parent
-                #print("This is the currentnode %s and current line cd %s" % (currentnode.name, line))
-            elif parseline[2] == '/': #go back to top dir
-                currentnode = headnode
-                #print("This is the currentnode %s and current line head %s" % (currentnode.name, line))
+                    current_node = current_node.parent
+            elif parse_line[2] == '/': 
+                current_node = head_node
             else: #step into a child dir
-                x = find(parseline[2])
-                if x != NOTFOUND:
-                    currentnode = currentnode.children[x]
-                    #print("This is the currentnode %s and current line child %s" % (currentnode.name, line))
+                x = find(parse_line[2])
+                if x != NOT_FOUND:
+                    current_node = current_node.children[x]
         else:
             print("Inconsistent for line %s" % line)
             break
-    elif parseline[0] == 'dir':
-        x = find(parseline[1])
-        if x == NOTFOUND:
-            newnode = Node(parseline[1], 0, "dir")
-            newnode.parent = currentnode 
-            currentnode.children.append(newnode) 
-            #print("This is the currentnode %s and current line dir %s" % (currentnode.name, line))
+    elif parse_line[0] == 'dir':
+        x = find(parse_line[1])
+        if x == NOT_FOUND:
+            new_node = Node(parse_line[1], 0, "dir")
+            new_node.parent = current_node 
+            current_node.children.append(new_node) 
         else:
-            print("Node already exists: %s" % parseline[1])
+            print("Node already exists: %s" % parse_line[1])
     else: #must be a file
-        x = find(parseline[1])
-        if x == NOTFOUND:
-            newnode = Node(parseline[1], int(parseline[0]), "file")
-            newnode.parent = currentnode
-            currentnode.children.append(newnode)
-            currentnode.size += int(parseline[0]) #adds to dir size
-            #print("This is the currentnode %s and current line file %s" % (currentnode.name, line))
+        x = find(parse_line[1])
+        if x == NOT_FOUND:
+            new_node = Node(parse_line[1], int(parse_line[0]), "file")
+            new_node.parent = current_node
+            current_node.children.append(new_node)
+            current_node.size += int(parse_line[0])
         else:
-            print("Node already exists: %s" % parseline[1])
+            print("Node already exists: %s" % parse_line[1])
 
-
-set_dir_sizes(headnode)
-aTotal = partA(headnode, PART_A_LIMIT, partAlist)
-bValue = partB(headnode, freeupamount(), partAlist)
-print("Part A: %d" % aTotal)
-print("Part B: %d" % bValue)
+set_dir_sizes(head_node)
+a_total = part_a(head_node, PART_A_LIMIT, part_list_a)
+b_value = part_b(head_node, free_up_amount(), part_list_a)
+print("Part A: %d" % a_total)
+print("Part B: %d" % b_value)

@@ -2,8 +2,8 @@ a_lower = []
 a_upper = []
 b_lower = []
 b_upper = []
-atotal = 0
-btotal = 0
+a_total = 0
+b_total = 0
 
 with open('input4.txt') as i:
     sections = i.read().splitlines()
@@ -22,13 +22,17 @@ for row in sections:
             print("Uhhh what happenedon count %d with value: %s" % (count,value))
 
 for x in range(1000):
-    arange = range(a_lower[x], a_upper[x]+1)
-    brange = range(b_lower[x], b_upper[x]+1)
-    if arange[0] in brange and arange[-1] in brange or brange[0] in arange and brange[-1] in arange:
-        atotal += 1
+    a_range = range(a_lower[x], a_upper[x]+1)
+    b_range = range(b_lower[x], b_upper[x]+1)
+    cond_1 = a_range[0] in b_range and a_range[-1] in b_range
+    cond_2 = b_range[0] in a_range and b_range[-1] in a_range
+    cond_3 = a_range[0] in b_range or a_range[-1] in b_range
+    cond_4 = b_range[0] in a_range or b_range[-1] in a_range
+    if  cond_1 or cond_2:
+        a_total += 1
     
-    if arange[0] in brange or arange[-1] in brange or brange[0] in arange or brange[-1] in arange:
-        btotal +=1
+    if  cond_3 or cond_4:
+        b_total +=1
 
-print("Final A Total: %d" % atotal)
-print("Final B Total: %d" % btotal)
+print("Final A Total: %d" % a_total)
+print("Final B Total: %d" % b_total)
