@@ -10,7 +10,7 @@ output_cycles_values = []
 sprite_line = ['.' for i in range(WIDTH)]
 
 def draw(sprite_line=sprite_line):
-    cycle = (cycles % 40)-1
+    cycle = (cycles % WIDTH)-1
     if cycle == -1:
         cycle = 39
     if cycle in range(x-1,x+2):

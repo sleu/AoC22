@@ -1,4 +1,4 @@
-knots = 2
+knots = 10
 visited = []
 rope = [[0,0] for i in range(knots)]
 directions = []
