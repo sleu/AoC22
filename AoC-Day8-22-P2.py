@@ -53,7 +53,7 @@ def check_south_vis(input_list, y_position, x_position, value):
             break
     return count
 
-with open('input8.txt') as i:
+with open('inputs/input8.txt') as i:
     input = i.read().splitlines()
 
 for line in input:

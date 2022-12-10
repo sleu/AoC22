@@ -11,7 +11,7 @@ move_quantity = []
 from_stack = []
 to_stack = []
 
-with open('input5.txt') as i:
+with open('inputs/input5.txt') as i:
     sections = i.read().splitlines()
 
 for sect in sections:

@@ -33,7 +33,7 @@ def result_b(them, me):
     else:
         return 1
 
-with open('input2.txt') as i:
+with open('inputs/input2.txt') as i:
     play = i.read().splitlines()
 
 for action in play:

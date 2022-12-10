@@ -55,7 +55,7 @@ parse_line = []
 head_node = Node("/", 0, "dir")
 current_node = head_node
 
-with open('input7.txt') as i:
+with open('inputs/input7.txt') as i:
     input = i.read().splitlines()
 
 #Builds the data

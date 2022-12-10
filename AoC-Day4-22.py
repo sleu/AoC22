@@ -5,7 +5,7 @@ b_upper = []
 a_total = 0
 b_total = 0
 
-with open('input4.txt') as i:
+with open('inputs/input4.txt') as i:
     sections = i.read().splitlines()
 
 for row in sections:

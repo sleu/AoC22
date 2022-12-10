@@ -1,7 +1,7 @@
 total_foods = []
 calories = 0
 
-with open('input1.txt') as i:
+with open('inputs/input1.txt') as i:
     food_list = i.read().splitlines()
 
 for food in food_list:

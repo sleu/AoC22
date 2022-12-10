@@ -1,6 +1,6 @@
 parsed_a = []
 parsed_b = []
-with open('input6.txt') as i:
+with open('inputs/input6.txt') as i:
     datastream = i.read() #datastream is returned as a string
 
 for letter in datastream:

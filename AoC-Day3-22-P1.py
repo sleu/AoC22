@@ -4,7 +4,7 @@ compartment_1 = []
 compartment_2 = []
 total = 0
 key = list(string.ascii_lowercase + string.ascii_uppercase)
-with open('input3.txt') as i:
+with open('inputs/input3.txt') as i:
     rucksacks = i.read().splitlines()
 
 for x in rucksacks:

@@ -29,7 +29,7 @@ def check_south(input_list, y_position, x_position, value):
             visible = False
     return visible
 
-with open('input8.txt') as i:
+with open('inputs/input8.txt') as i:
     input = i.read().splitlines()
 
 for count, line in enumerate(input):

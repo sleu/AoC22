@@ -23,7 +23,7 @@ def reset_line(sprite_line=sprite_line):
     for x in range(len(sprite_line)):
         sprite_line[x] = '.'
 
-with open('input10.txt') as i:
+with open('inputs/input10.txt') as i:
     input = i.read().splitlines()
 
 for line in input:

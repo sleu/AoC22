@@ -1,6 +1,6 @@
 input_list = []
 
-with open('input9.txt') as i:
+with open('inputs/input25.txt') as i:
     input = i.read().splitlines()
 
 for line in input:
