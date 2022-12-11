@@ -2,7 +2,6 @@ import math
 
 NUMBER_OF_ROUNDS = 10000 #A = 20, B = 10000
 WORRY_LEVEL = 1 #A = 3, B = 1
-input_list = []
 monkeys = []
 
 class Monkey:
@@ -29,8 +28,7 @@ def calculate(item, operation, divisible):
         return False, item
 
 with open('inputs/input11.txt') as i: input = i.read().splitlines()
-    
-for line in input: input_list.append(line.strip().split(" "))
+input_list = [line.strip().split(" ") for line in input]
 
 #setup
 for count, line in enumerate(input_list):

@@ -1,10 +1,5 @@
-input_list = []
-
-with open('inputs/input12.txt') as i:
-    input = i.read().splitlines()
-
-for line in input:
-    input_list.append(line.split(' '))
+with open('inputs/input12.txt') as i: input = i.read().splitlines()
+input_list = [line.split(" ") for line in input]
 
 for step in input_list:
     #TODO
