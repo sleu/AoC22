@@ -1,4 +1,5 @@
-NUMBER_OF_ROUNDS = 20
+NUMBER_OF_ROUNDS = 20 #A = 20, B = 10000
+WORRY_LEVEL = 1 #A = 3, B = 1
 input_list = []
 monkeys = []
 
@@ -25,13 +26,13 @@ def calculate(item, operation, divisible):
                 calc = calc * calc
             else:
                  calc = calc * int(operation[1])
-    calc = calc//3
+    calc = calc//item
     if calc % divisible == 0:
         return True, calc
     else:
         return False, calc
 
-with open('inputs/input11.txt') as i:
+with open('inputs/sample.txt') as i:
     input = i.read().splitlines()
     
 for line in input:
@@ -69,4 +70,5 @@ for r in range(NUMBER_OF_ROUNDS):
 
 active = [x.inspect_count for x in monkeys]
 active.sort(reverse=True)
+print(active)
 print("Total: %d" % (active[0] * active[1]))
