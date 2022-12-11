@@ -19,7 +19,7 @@ for row in sections:
             b_lower.append(int(split2[0]))
             b_upper.append(int(split2[1]))
         else:
-            print("Uhhh what happenedon count %d with value: %s" % (count,value))
+            print("Uhhh what happened on count %d with value: %s" % (count,value))
 
 for x in range(1000):
     a_range = range(a_lower[x], a_upper[x]+1)
