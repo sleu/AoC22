@@ -1,4 +1,6 @@
-NUMBER_OF_ROUNDS = 20 #A = 20, B = 10000
+import math
+
+NUMBER_OF_ROUNDS = 10000 #A = 20, B = 10000
 WORRY_LEVEL = 1 #A = 3, B = 1
 input_list = []
 monkeys = []
@@ -14,29 +16,21 @@ class Monkey:
         self.inspect_count = 0
         
 def calculate(item, operation, divisible):
-    calc = item
     match operation[0]:
         case "+":
-            if operation[1] == "old":
-                calc = calc + calc
-            else:
-                calc = calc + int(operation[1])
+            item = 2*item if operation[1]=="old" else item + int(operation[1])
         case "*":
-            if operation[1] == "old":
-                calc = calc * calc
-            else:
-                 calc = calc * int(operation[1])
-    calc = calc//item
-    if calc % divisible == 0:
-        return True, calc
-    else:
-        return False, calc
+            item = item**2 if operation[1]=="old" else item * int(operation[1])
 
-with open('inputs/sample.txt') as i:
-    input = i.read().splitlines()
+    item = (item % mod)//WORRY_LEVEL
+    if item % divisible == 0:
+        return True, item
+    else:
+        return False, item
+
+with open('inputs/input11.txt') as i: input = i.read().splitlines()
     
-for line in input:
-    input_list.append(line.strip().split(" "))
+for line in input: input_list.append(line.strip().split(" "))
 
 #setup
 for count, line in enumerate(input_list):
@@ -56,13 +50,14 @@ for count, line in enumerate(input_list):
             else:
                 monkeys[-1].monkey_false = line[-1]
 
+mod = math.prod(m.test for m in monkeys)
+
 #execute
-for r in range(NUMBER_OF_ROUNDS):
+for _ in range(NUMBER_OF_ROUNDS):
     for m in monkeys:
         while len(m.items) > 0:
-            i = m.items.pop(0)
             m.inspect_count +=1
-            result = calculate(i, m.operation, m.test)
+            result = calculate(m.items.pop(0), m.operation, m.test)
             if result[0] == True:
                 monkeys[int(m.monkey_true)].items.append(result[1])
             else:
