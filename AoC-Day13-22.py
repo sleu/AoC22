@@ -78,7 +78,7 @@ def compare (left, right):
             return False #right runs out before left
     return True
 
-with open('inputs/sample.txt') as i: input = i.read().splitlines()
+with open('inputs/input13.txt') as i: input = i.read().splitlines()
 
 for line in input:
     if line == '': continue
@@ -95,15 +95,15 @@ for i in range(0, len(input_list), 2):
         correct += indicies
 
 print("A Correct: %d" % correct)
-
-decoder = ["[[2]]","[[6]]"] 
+input_list.insert(0, [[2]])
+input_list.insert(0, [[6]])
 b_sum = 0
-ordered_list = [[[2]],[[6]]] #TODO: FIT THIS IN
+ordered_list = []#TODO: FIT THIS IN
 for i,input in enumerate(input_list):
     for o, order in enumerate(ordered_list):
-        print("Current order list: %s" % ordered_list)
-        print("input %s" % input)
-        print("order %s" % order)
+        #print("Current order list: %s" % ordered_list)
+        #print("input %s" % input)
+        #print("order %s" % order)
         if compare(order, input): 
             #print("order more correct")
             ordered_list.insert(o,input)
@@ -111,5 +111,6 @@ for i,input in enumerate(input_list):
     if input not in ordered_list: ordered_list.append(input)
 
 ordered_list.reverse()
-for i in range(len(ordered_list)):
-    print(ordered_list[i])
+two = ordered_list.index([[2]]) +1
+six = ordered_list.index([[6]]) +1
+print(two * six)
