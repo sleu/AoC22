@@ -93,23 +93,17 @@ for i in range(0, len(input_list), 2):
     compared = compare(left, right)
     if compared == True: 
         correct += indicies
+        print(indicies)
 
 print("A Correct: %d" % correct)
-
-decoder = ["[[2]]","[[6]]"] 
+decoder = ["[[6]]","[[7]]"] 
 b_sum = 0
-ordered_list = [[[2]],[[6]]] #TODO: FIT THIS IN
+ordered_list = []
 for i,input in enumerate(input_list):
     for o, order in enumerate(ordered_list):
-        print("Current order list: %s" % ordered_list)
-        print("input %s" % input)
-        print("order %s" % order)
-        if compare(order, input): 
-            #print("order more correct")
-            ordered_list.insert(o,input)
-            break
+        if compare(input, order): ordered_list.insert(o-1,input)
+        break
     if input not in ordered_list: ordered_list.append(input)
-
-ordered_list.reverse()
-for i in range(len(ordered_list)):
-    print(ordered_list[i])
+print(ordered_list)
+#for i in range(len(ordered_list)):
+#    print(ordered_list[i])
