@@ -33,7 +33,6 @@ def build_row(line):
 
 def find_matching_bracket(line, match):
     open_positions = []
-    bracket_pairings = []
     for i, c in enumerate(line):
         if i == 0 and c =="]":
             print("Invalid input with %d" % line)
@@ -100,9 +99,7 @@ input_list.insert(0, [[6]])
 ordered_list = []
 for i,input in enumerate(input_list):
     for o, order in enumerate(ordered_list):
-
         if compare(order, input): 
-            #print("order more correct")
             ordered_list.insert(o,input)
             break
     if input not in ordered_list: ordered_list.append(input)
