@@ -1,3 +1,5 @@
-x = [1,2,3,4]
-x.extend((3,6))
-print(range(3,6) in range(0,40))
+x = set()
+x.add((1))
+x.add((2))
+x.add((1))
+print(x)

@@ -15,15 +15,35 @@ def part_a(row):
             covered_count.extend(range(l, v[0][0]))
     return len(set(covered_count))
 
+def part_ab(row):
+    covered_count = set()
+    for i,v in enumerate(input_list):
+        up = v[0][1] - distances[i]
+        down = v[0][1] + distances[i]
+        if row in range(up,v[0][1]) or row in range(v[0][1],down):
+            #print(v,v[0][1],up, down, distances[i])
+            x = abs(abs(v[0][1]-row) - distances[i])
+            r = v[0][0] + x
+            l = v[0][0] - x
+            if 4_000_000 in range(v[0][0], r) and 0 in range(l,v[0][0]):
+                covered_count.extend(range(4_000_001))
+            elif 4_000_000 in range(v[0][0], r):
+                covered_count.extend(range(v[0][0], 4_000_001))
+            elif 0 in range(l,v[0][0]):
+                covered_count.extend(range(0, v[0][0]))
+    return len(set(covered_count))   
+
 def part_b():
-    covered_count = []
+    covered_count = [[] for _ in range(4000001)]
     for i,v in enumerate(input_list):
         up = v[0][1] - distances[i]
         down = v[0][1] + distances[i]
         left = v[0][0] - distances[i]
         right = v[0][0] + distances[i]
         if 0 in range(up,down):
-            #TODO
+            for y in range(0,down):
+                if left <= 0:
+                    covered_count[y][0] = [left]
             return 0
         elif 4_000_000 in range(up,down):
             return 0
@@ -46,7 +66,12 @@ for row in input_list:
         b_x,b_y = row[1][0],row[1][1]
         d = abs(b_x - s_x) + abs(b_y - s_y)
         distances.append(d)
+for x in range(1_000_000,1_100_000): #TOO SLOW
+    y = part_ab(x)
+    if y == 4_000_000:
+        print(y)
+        break
 
-print(part_a(2000000))
+#print(part_a(2000000))
 
 #frequency = x*4000000 + y
