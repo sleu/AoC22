@@ -1,5 +1,3 @@
-x = set()
-x.add((1))
-x.add((2))
-x.add((1))
-print(x)
+d = [11230]
+*f, = d
+print(f)

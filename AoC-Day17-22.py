@@ -1,11 +1,12 @@
-input_list = []
+map = [['.' for _ in range(7)]]
 
-with open('inputs/input17.txt') as i:
-    input = i.read().splitlines()
+def create_row(n):
+    for _ in range(n):
+        map.append(['.' for _ in range(7)])
 
-for line in input:
-    input_list.append(line.split(' '))
 
-for step in input_list:
-    #TODO
-    break
+
+with open('inputs/input17.txt') as i: input = [*i.read()]
+ 
+create_row(2)
+print(map)
