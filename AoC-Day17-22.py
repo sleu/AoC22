@@ -1,6 +1,5 @@
 map = [] #y,x
-top_row = 0
-
+rock_height = 0
 class Rock:
     def __init__(self, type): #position is bottom left coordinates
         self.type = type
@@ -76,6 +75,7 @@ class Rock:
                         return False
                     else:
                         return True
+        #print(dir)
         match dir:
             case ">":
                 if check_right(): self.position[0] +=1; #print("moved right")
@@ -116,10 +116,10 @@ class Rock:
             case 3: # |
                 if self.position[1]-3 == 0:
                     return False
-                elif map[self.position[0]-4][self.position[0]] == "#":
+                elif map[self.position[1]-4][self.position[0]] == "#":
                     return False 
                 else:
-                    self.position[1] +=1
+                    self.position[1] -=1
                     return True
             case 4: # #
                 if self.position[1]-1 == 0:
@@ -175,29 +175,25 @@ class Rock:
                 return 4
             case 4: # #
                 return 2
-    
-    
 
 def create_row(n):
     for _ in range(n):
         map.append(['.' for _ in range(7)])
 
 def print_map():
-
     for x in map[::-1]:
         print(x)
 
 with open('inputs/sample.txt') as i: input = [*i.read()]
  
-
 r=0
 j=0
-while r < 2:
+while r < 25: #24,25
     print("Rock Count: %d" % r)
     rock = Rock(r%5)
-    top_row += rock.rows() + 3 #set starting - first object
+    top_row = rock.rows() + 3 + rock_height
     print("Top Row: %d" % top_row)
-    create_row(top_row)
+    if len(map) < top_row: create_row(top_row - len(map))     
     print("Map Height: %d" % len(map))
     rock.position = [2, top_row-1]
     floor = False
@@ -208,9 +204,10 @@ while r < 2:
             floor = True
             for x in rock.imprint():
                 map[x[1]][x[0]] = "#"
-            
         j+=1
+    print("rock height %d position %d" % (rock_height,rock.position[1]))
+    if rock_height <= rock.position[1]: rock_height = rock.position[1]+1
+    
     r+=1
-print_map()
-print(len(map))
-#top row is +3 units from the top block
+#print_map()
+print(rock_height)
