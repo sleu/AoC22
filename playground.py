@@ -1,3 +1,4 @@
-d = [11230]
-*f, = d
-print(f)
+position = [] #x,y
+
+position = [1,1]
+print(position)
