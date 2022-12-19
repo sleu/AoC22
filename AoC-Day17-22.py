@@ -13,7 +13,10 @@ class Rock:
                     else:
                         return True
                 case 1: # +
-                    if self.position[0]+2 == 6 or map[self.position[1]-1][self.position[0]+3] == "#":
+                    if (self.position[0]+2 == 6 or 
+                    map[self.position[1]][self.position[0]+2] == "#" or
+                    map[self.position[1]-1][self.position[0]+3] == "#" or
+                    map[self.position[1]-2][self.position[0]+2] == "#"):
                         return False 
                     else:
                         return True
@@ -50,7 +53,9 @@ class Rock:
                     else:
                         return True
                 case 1: # +
-                    if map[self.position[1]-1][self.position[0]-1] == "#":
+                    if (map[self.position[1]][self.position[0]] == "#" or
+                    map[self.position[1]-1][self.position[0]-1] == "#" or 
+                    map[self.position[1]-2][self.position[0]] == "#"):
                         return False 
                     else:
                         return True
@@ -98,7 +103,9 @@ class Rock:
             case 1: # +
                 if self.position[1]-2 == 0:
                     return False
-                elif map[self.position[1]-3][self.position[0]+1] == "#":
+                elif (map[self.position[1]-3][self.position[0]+1] == "#" or
+                    map[self.position[1]-2][self.position[0]] == "#" or
+                    map[self.position[1]-2][self.position[0]+2] == "#"):
                     return False 
                 else:
                     self.position[1]-=1
@@ -184,30 +191,33 @@ def print_map():
     for x in map[::-1]:
         print(x)
 
-with open('inputs/sample.txt') as i: input = [*i.read()]
+with open('inputs/input17.txt') as i: input = [*i.read()]
  
 r=0
 j=0
-while r < 25: #24,25
-    print("Rock Count: %d" % r)
+while r < 30000: 
+    #print("Rock Count: %d" % r)
     rock = Rock(r%5)
     top_row = rock.rows() + 3 + rock_height
-    print("Top Row: %d" % top_row)
+    #print("Top Row: %d" % top_row)
     if len(map) < top_row: create_row(top_row - len(map))     
-    print("Map Height: %d" % len(map))
+    #print("Map Height: %d" % len(map))
     rock.position = [2, top_row-1]
     floor = False
+    subcount = 0
     while not floor:
-        print("J %d" % j)
+        subcount +=1
+        #print("J %d" % j)
         rock.jet_move(input[j%len(input)])
         if not rock.down_move():
             floor = True
             for x in rock.imprint():
                 map[x[1]][x[0]] = "#"
         j+=1
-    print("rock height %d position %d" % (rock_height,rock.position[1]))
+    #print("rock height %d position %d" % (rock_height,rock.position[1]))
+    print(subcount)
     if rock_height <= rock.position[1]: rock_height = rock.position[1]+1
     
     r+=1
 #print_map()
-print(rock_height)
+print(rock_height, j , len(input))

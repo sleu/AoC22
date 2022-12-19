@@ -4,7 +4,7 @@ with open('inputs/input18.txt') as i:
     input = i.read().splitlines()
 
 for line in input:
-    input_list.append(line.split(' '))
+    input_list.append(line.split(','))
 
 for step in input_list:
     #TODO
