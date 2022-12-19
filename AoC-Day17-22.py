@@ -1,7 +1,7 @@
 map = [] #y,x
 rock_height = 0
 class Rock:
-    def __init__(self, type): #position is bottom left coordinates
+    def __init__(self, type): #position is top left coordinates
         self.type = type
         self.position = [] #x,y
     def jet_move(self, dir):
@@ -80,14 +80,12 @@ class Rock:
                         return False
                     else:
                         return True
-        #print(dir)
         match dir:
             case ">":
-                if check_right(): self.position[0] +=1; #print("moved right")
+                if check_right(): self.position[0] +=1; 
             case "<":
-                if check_left(): self.position[0] -=1; #print("moved left")
+                if check_left(): self.position[0] -=1; 
     def down_move(self):
-        #print("in move down with y at %d" % self.position[1])
         match self.type:
             case 0: # -
                 if self.position[1] == 0:
@@ -196,28 +194,24 @@ with open('inputs/input17.txt') as i: input = [*i.read()]
 r=0
 j=0
 while r < 30000: 
-    #print("Rock Count: %d" % r)
     rock = Rock(r%5)
     top_row = rock.rows() + 3 + rock_height
-    #print("Top Row: %d" % top_row)
     if len(map) < top_row: create_row(top_row - len(map))     
-    #print("Map Height: %d" % len(map))
     rock.position = [2, top_row-1]
     floor = False
     subcount = 0
     while not floor:
         subcount +=1
-        #print("J %d" % j)
         rock.jet_move(input[j%len(input)])
         if not rock.down_move():
             floor = True
             for x in rock.imprint():
                 map[x[1]][x[0]] = "#"
         j+=1
-    #print("rock height %d position %d" % (rock_height,rock.position[1]))
     print(subcount)
     if rock_height <= rock.position[1]: rock_height = rock.position[1]+1
     
     r+=1
-#print_map()
+
+
 print(rock_height, j , len(input))
