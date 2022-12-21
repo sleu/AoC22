@@ -17,7 +17,7 @@ while r < 10:
     while l < len(file):
         x=file[[n.order for n in file].index(l)]
         if not x.used:
-            file[[n.order for n in file].index(l)].used = True
+            x.used = True
             index = ([n.order for n in file].index(l)+x.value) % (len(file)-1)
             del file[[n.order for n in file].index(l)]
             file.insert(index, x)
