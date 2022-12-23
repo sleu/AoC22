@@ -1,4 +1,5 @@
 map = [] #y,x
+pattern=[]
 rock_height = 0
 class Rock:
     def __init__(self, type): #position is top left coordinates
@@ -189,10 +190,11 @@ def print_map():
     for x in map[::-1]:
         print(x)
 
-with open('inputs/input17.txt') as i: input = [*i.read()]
+with open('inputs/sample.txt') as i: input = [*i.read()]
  
 r=0
 j=0
+p=0
 while r < 30000: 
     rock = Rock(r%5)
     top_row = rock.rows() + 3 + rock_height
@@ -207,6 +209,14 @@ while r < 30000:
             floor = True
             for x in rock.imprint():
                 map[x[1]][x[0]] = "#"
+            if len(pattern)==0:
+                pattern.append(rock)
+            elif pattern[p].type==rock.type and pattern[p].position[0]==rock.position[0]:
+                p+=1
+                #store any other tracking values like delta of height
+            else:
+                pattern.append(rock)
+                p=0
         j+=1
     print(subcount)
     if rock_height <= rock.position[1]: rock_height = rock.position[1]+1
